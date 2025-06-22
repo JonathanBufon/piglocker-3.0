@@ -1,0 +1,880 @@
+/* Reset Básico e Configurações Globais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    color: #333;
+    background-color: #f0f2f5;
+    line-height: 1.6;
+}
+
+/* Telas de Login, Bloqueio e 2FA */
+
+/* ================================== */
+/* TELA DE CARREGAMENTO (LOADING)     */
+/* ================================== */
+
+#loading-screen {
+    background-color: #324aa2; /* Usa a mesma cor de fundo do login */
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Garante que fique acima de tudo */
+}
+
+.loading-dots div {
+    width: 15px;
+    height: 15px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0 5px;
+    
+    /* Aplica a animação que vamos criar */
+    animation: bounce 1.4s infinite ease-in-out both;
+}
+
+/* Define um atraso para cada ponto, criando o efeito de "onda" */
+.loading-dots .div-2 {
+    animation-delay: -0.16s;
+}
+
+.loading-dots .div-3 {
+    animation-delay: -0.32s;
+}
+
+/* Define a animação de pulo */
+@keyframes bounce {
+    0%, 80%, 100% {
+        transform: scale(0);
+    } 
+    40% {
+        transform: scale(1.0);
+    }
+}
+
+#login-screen, #lock-screen, #tfa-screen {
+    background-color: #324aa2; /* Cor atualizada */
+}
+.screen {
+    display: none;
+    width: 100%;
+    height: 100vh;
+}
+
+.screen.active {
+    display: flex;
+}
+
+.login-container {
+    background-color: #ffffff; 
+    padding: 40px;
+    border-radius: 8px;
+    width: 380px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    margin: auto;
+}
+
+.login-container h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #1c1e21;
+}
+
+.login-container p {
+    font-size: 16px;
+    margin-bottom: 25px;
+    color: #606770;
+}
+
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #333;
+    font-weight: bold;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #dddfe2;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+.input-group .link {
+    display: block;
+    margin-top: 10px;
+    font-size: 12px;
+    color: #324aa2;
+    text-decoration: none;
+}
+.input-group .link:hover {
+    text-decoration: underline;
+}
+
+
+/* Estilos Gerais de Botões */
+.btn {
+    background-color: #4a6cff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn:hover {
+    background-color: #3b5ce6;
+}
+
+.btn .btn-icon {
+    margin-right: 8px;
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+}
+
+.btn.btn-secondary {
+    background-color: #e4e6eb;
+    color: #333;
+}
+.btn.btn-secondary:hover {
+    background-color: #d8dade;
+}
+
+.btn.btn-outline {
+    background-color: transparent;
+    color: #4a6cff;
+    border: 1px solid #4a6cff;
+}
+.btn.btn-outline:hover {
+    background-color: #f0f4ff;
+}
+.btn.btn-danger {
+    background-color: #e74c3c;
+    color: white;
+}
+.btn.btn-danger:hover {
+    background-color: #c0392b;
+}
+
+
+/* Tela Principal */
+#main-screen {
+    height: 100vh;
+    background-color: #f7f8fc;
+}
+
+.sidebar {
+    width: 260px;
+    background-color: #324aa2;
+    color: #ffffff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.sidebar-header .logo-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    margin-right: 12px;
+    object-fit: contain;
+}
+
+.sidebar-header h1 {
+    font-size: 22px;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+}
+
+.sidebar-nav .nav-item > a {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* <-- ALTERE ESTA LINHA */
+    color: #e0e0ff;
+    text-decoration: none;
+    padding: 12px 15px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    font-size: 16px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.sidebar-nav .nav-item.has-submenu > a {
+    justify-content: space-between;
+}
+.sidebar-nav .nav-item > a .nav-icon { /* Ícones da navegação */
+    margin-right: 12px;
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    flex-shrink: 0; /* Para não encolher */
+}
+.sidebar-nav .nav-item > a .arrow-icon {
+    width: 12px;
+    height: 12px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+    margin-left: auto; /* Empurra a seta para a direita */
+}
+.sidebar-nav .nav-item.has-submenu.open > a .arrow-icon {
+    transform: rotate(180deg);
+}
+
+
+.sidebar-nav li a img[src*="password-white.png"],
+.sidebar-nav li a img[src*="settings.png"],
+.sidebar-nav li a img[src*="arrow-baixo.png"] {
+   filter: none; /* Assumindo que já são claros ou têm a cor correta */
+}
+
+
+.sidebar-nav .nav-item.active > a,
+.sidebar-nav .submenu li.active a {
+    background-color: #4a6cff;
+    color: #ffffff;
+}
+.sidebar-nav .nav-item > a:hover,
+.sidebar-nav .submenu li a:hover {
+    background-color: #4f4f94;
+}
+
+.sidebar-nav .submenu {
+    list-style: none;
+    padding-left: 25px; /* Indentação para subitens */
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+.sidebar-nav .nav-item.has-submenu.open .submenu {
+    max-height: 200px; /* Ajuste conforme a quantidade de subitens */
+}
+.sidebar-nav .submenu li a {
+    padding: 10px 15px;
+    font-size: 15px;
+    display: block; /* Submenu links ocupam toda a largura */
+    color: #d0d0ff;
+}
+
+
+.content-area {
+    flex: 1;
+    padding: 25px;
+    overflow-y: auto;
+}
+/* Esconde todas as seções de conteúdo por padrão */
+.content-section {
+    display: none;
+}
+/* Mostra a seção ativa */
+.content-section.active-section {
+    display: block;
+}
+
+
+.content-header {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Espaçamento entre os itens do header */
+    margin-bottom: 30px;
+}
+
+.content-header h2 {
+    flex-grow: 1; /* Faz o título ocupar todo o espaço flexível no meio */
+    text-align: left; /* Alinha o texto à esquerda */
+    font-size: 28px;
+    color: #1c1e21;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    position: relative;
+}
+
+.header-actions .profile-icon {
+    width: 40px;
+    height: 40px;
+    background-color: #4a6cff;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Formulários (Nova, Editar, Minha Conta) */
+#form-nova-credencial-container,
+#form-editar-credencial-container,
+#secao-minha-conta { /* #secao-minha-conta herda muitos estilos de formulário */
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+#form-nova-credencial-container h3,
+#form-editar-credencial-container h3,
+#secao-minha-conta h3 { /* Título principal da seção */
+    font-size: 22px;
+    margin-bottom: 25px;
+    color: #1c1e21;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+}
+#secao-minha-conta .section-subtitle { /* Subtítulos em Minha Conta */
+    font-size: 18px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    color: #333;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 10px;
+}
+
+
+#novo-form fieldset, #edit-form fieldset {
+    border: 1px solid #dddfe2;
+    border-radius: 6px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+#novo-form legend, #edit-form legend {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    padding: 0 10px;
+}
+
+.form-group { /* Usado em todos os formulários */
+    margin-bottom: 20px;
+}
+
+.form-group label { /* Usado em todos os formulários */
+    display: block;
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: 500;
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"],
+.form-group input[type="url"],
+.form-group input[type="email"] { /* Usado em todos os formulários */
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+    transition: border-color 0.2s ease;
+}
+.form-group input:focus {
+    border-color: #4a6cff;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(74, 108, 255, 0.2);
+}
+.form-group input[readonly] {
+    background-color: #f5f5f5;
+    cursor: not-allowed;
+}
+
+
+.password-wrapper { /* Usado em todos os formulários com senha */
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.password-wrapper input {
+    padding-right: 45px;
+}
+.toggle-password { /* Usado em todos os formulários com senha */
+    position: absolute;
+    right: 1px;
+    top: 0;
+    bottom: 0;
+    width: 40px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.toggle-password .icon-eye {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+
+.btn-link { /* Usado em formulários */
+    background: none;
+    border: none;
+    color: #4a6cff;
+    cursor: pointer;
+    padding: 5px 0;
+    font-size: 14px;
+}
+.btn-link:hover {
+    text-decoration: underline;
+}
+
+.form-actions { /* Usado em todos os formulários */
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 25px;
+}
+/* Ajuste para o formulário de edição ter lixeira à esquerda */
+#edit-form .form-actions {
+    justify-content: space-between;
+}
+
+
+/* Lista de Credenciais */
+#lista-credenciais-container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.table-controls {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+.table-controls label {
+    margin-left: 8px;
+    font-size: 15px;
+    color: #333;
+}
+
+.table-header-custom, .table-row-custom {
+    display: grid;
+    grid-template-columns: 40px 2fr 2fr 80px;
+    padding: 12px 10px;
+    border-bottom: 1px solid #e0e0e0;
+    align-items: center;
+    gap: 10px;
+}
+
+.table-header-custom {
+    font-weight: bold;
+    color: #333;
+    font-size: 15px;
+    background-color: #f7f8fc;
+}
+
+.table-row-custom span {
+    font-size: 14px;
+    color: #555;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.table-row-custom input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #4a6cff; /* Cor do checkbox marcado */
+}
+.table-row-custom.empty {
+    height: 48px;
+    border-bottom: 1px solid #e0e0e0;
+}
+.table-row-custom:last-child {
+    border-bottom: none;
+}
+
+.actions-menu {
+    position: relative;
+    text-align: right;
+}
+.action-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+    color: #555;
+    padding: 5px;
+}
+.action-btn:hover {
+    color: #000;
+}
+
+/* Dropdowns (Perfil e Ações da Credencial) */
+.profile-menu, .actions-dropdown {
+    position: absolute;
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 100; /* Alto z-index para ficar sobre outros elementos */
+    padding: 8px 0;
+    min-width: 180px; /* Largura mínima */
+}
+.profile-menu {
+    top: calc(100% + 5px); /* Abaixo do ícone de perfil */
+    right: 0;
+}
+.actions-dropdown {
+    top: calc(100% + 5px); /* Abaixo do botão de três pontos */
+    right: 0;
+    min-width: 220px;
+}
+
+.profile-menu a, .actions-dropdown a {
+    display: flex; /* Para alinhar ícones se adicionados */
+    align-items: center;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+/* ================================== */
+/* ESTILOS DO MODAL          */
+/* ================================== */
+
+/* A camada escura que cobre a tela inteira */
+.modal-overlay {
+    position: fixed; /* Fica fixo na tela mesmo com rolagem */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Fundo preto semi-transparente */
+    
+    /* A mágica para centralizar o conteúdo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    z-index: 1000; /* Garante que o modal fique na frente de tudo */
+    opacity: 0; /* Começa invisível para a animação */
+    visibility: hidden; /* Começa escondido */
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Quando o JavaScript adiciona a classe 'active' ao modal-overlay (não implementado, mas bom ter) */
+/* Ou quando o estilo é display: flex (nosso caso) */
+#modal-excluir-item[style*="display: flex"] {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* O contêiner branco do modal */
+.modal-content {
+    background-color: #ffffff;
+    padding: 30px 40px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    position: relative; /* Para posicionar o botão de fechar */
+    transform: scale(0.9); /* Efeito de zoom ao aparecer */
+    transition: transform 0.3s ease;
+}
+
+#modal-excluir-item[style*="display: flex"] .modal-content {
+    transform: scale(1);
+}
+
+/* Ícone de aviso (amarelo) */
+.modal-icon-warning {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+/* Título do modal */
+.modal-content h3 {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Texto principal do modal */
+.modal-content p {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.5;
+}
+
+/* Texto de aviso em vermelho */
+.modal-warning-text {
+    color: #c0392b;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+/* Botão de fechar (X) no canto */
+.modal-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 28px;
+    color: #aaa;
+    cursor: pointer;
+    line-height: 1;
+}
+.modal-close-btn:hover {
+    color: #333;
+}
+
+
+/* Contêiner para os botões de ação (Sim/Não) */
+.modal-actions {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* Espaço entre os botões */
+}
+
+/* ================================== */
+/* ESTILOS DOS ÍCONES NO MENU DE AÇÕES */
+/* ================================== */
+
+.action-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
+    vertical-align: middle; /* Ajuda no alinhamento vertical com o texto */
+}
+
+/* Opcional: Garante que os links no dropdown se comportem bem com os ícones */
+.actions-dropdown a {
+    display: flex;
+    align-items: center;
+}
+
+/* ================================== */
+/* ESTILOS PARA A TELA DE 2FA         */
+/* ================================== */
+
+/* Ajusta o contêiner de login especificamente na tela 2FA */
+#tfa-screen .login-container {
+    padding: 30px 40px;
+}
+
+/* Estilo para o ícone 2FA */
+.tfa-icon {
+    width: 120px; /* Define uma largura fixa */
+    height: auto; /* A altura se ajusta automaticamente para não esticar */
+    display: block; /* Ajuda no alinhamento */
+    margin: 0 auto 20px auto; /* Centraliza a imagem e adiciona margem inferior */
+}
+
+/* Estilo para a mensagem de erro na tela 2FA */
+#tfa-error {
+    color: red;
+    margin-top: 15px;
+    display: none; /* Começa escondida */
+    font-size: 14px;
+}
+
+/* Estilo para o botão "Voltar" */
+#tfa-back-to-login-btn {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+#tfa-screen {
+    background-color: #324aa2;
+    /* As outras propriedades de alinhamento já são herdadas da classe .screen */
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* ================================================================
+   CSS RESPONSIVO PARA DISPOSITIVOS MÓVEIS
+   ================================================================ */
+
+/* Todas as regras aqui dentro só serão aplicadas em telas com largura máxima de 768px */
+@media (max-width: 768px) {
+
+    /* --- 1. Layout Principal e Sidebar --- */
+    .sidebar {
+    position: fixed;
+    transform: translateX(-100%); /* Começa escondida fora da tela */
+    top: 0;
+    height: 100%;
+    z-index: 1010;
+    transition: transform 0.3s ease-in-out;
+    }
+
+    .content-area {
+    /* Adiciona uma transição suave para o efeito de "empurrar" */
+    transition: transform 0.3s ease-in-out;
+    }
+
+/* Quando a sidebar estiver aberta... */
+body.sidebar-open .sidebar {
+    transform: translateX(0); /* Move a sidebar para dentro da tela */
+}
+body.sidebar-open .content-area {
+    transform: translateX(260px); /* Empurra o conteúdo para a direita (largura da sidebar) */
+    box-shadow: -10px 0 20px -10px rgba(0,0,0,0.2); /* Adiciona uma sombra para dar profundidade */
+}
+
+    /* Classe que o JavaScript vai adicionar ao <body> para mostrar a sidebar */
+    body.sidebar-open .sidebar {
+        left: 0; /* Move a sidebar para dentro da tela */
+    }
+
+    .content-area {
+        padding: 15px; /* Reduz o padding em telas menores */
+    }
+
+    .content-header h2 {
+        font-size: 22px; /* Reduz o tamanho do título */
+    }
+
+
+    /* --- 2. Botão Hambúrguer --- */
+    .hamburger-btn {
+    display: none; 
+    width: 30px;
+    height: 25px;
+    flex-direction: column;
+    justify-content: space-around;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1020;
+    flex-shrink: 0; /* Impede que o botão seja espremido */
+}
+
+.hamburger-btn span {
+    width: 100%;
+    height: 3px;
+    background-color: #333;
+    border-radius: 3px;
+}
+
+    
+    /* --- 3. Lista de Credenciais (Formato de Cartão) --- */
+
+    /* Esconde o cabeçalho da tabela em mobile */
+    .table-header-custom {
+        display: none;
+    }
+
+    /* Transforma a linha em um bloco de cartão */
+    .table-row-custom {
+        display: grid;
+        /* Define um novo layout de grid para mobile */
+        grid-template-areas: 
+            "check name actions"
+            "check user actions";
+        grid-template-columns: 40px 1fr 40px; /* Largura do checkbox, nome/usuário, ações */
+        padding: 15px 10px;
+        gap: 5px 10px; /* Espaçamento entre linhas e colunas */
+        border-bottom: 1px solid #e0e0e0;
+    }
+
+    .table-row-custom input[type="checkbox"] {
+        grid-area: check;
+        align-self: center; /* Centraliza o checkbox verticalmente */
+    }
+
+    .table-row-custom .actions-menu {
+        grid-area: actions;
+        align-self: center; /* Centraliza o menu de ações verticalmente */
+    }
+
+    /* Estiliza o Nome (primeiro span) */
+    .table-row-custom span:nth-of-type(1) {
+        grid-area: name;
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+    /* Estiliza o Nome de Usuário (segundo span) */
+    .table-row-custom span:nth-of-type(2) {
+        grid-area: user;
+        font-size: 14px;
+        color: #666;
+    }
+
+} 
+
+/* ================================== */
+/* AJUSTES NA MEDIA QUERY (JÁ EXISTENTE) */
+/* ================================== */
+
+/* Encontre sua @media query e certifique-se de que ela tenha estas regras */
+@media (max-width: 768px) {
+    /* ... (outras regras responsivas que já estão aqui) ... */
+
+    /* Mostra o botão hambúrguer em telas pequenas */
+    .hamburger-btn {
+        display: flex;
+    }
+
+    /* Ajusta o título no mobile */
+    .content-header h2 {
+        text-align: center; /* Centraliza o título no mobile */
+        font-size: 20px;
+    }
+    
+    /* ... (resto das suas regras responsivas) ... */
+}
+
+/* ================================== */
+/* ESTILOS PARA AÇÕES EM MASSA        */
+/* ================================== */
+
+.table-controls {
+    justify-content: space-between; /* Alinha os itens nas extremidades */
+    padding: 0 10px;
+}
+.table-controls > div { /* Div que agrupa o checkbox e o label */
+    display: flex;
+    align-items: center;
+}
+
+/* Estilo para botões menores */
+.btn.btn-sm {
+    padding: 5px 12px;
+    font-size: 13px;
+    font-weight: normal;
+}
